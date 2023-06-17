@@ -50,3 +50,41 @@ def extract_title_and_paragraphs(file_content: str):
     paragraphs = {title.strip('# '): content for title, content in paragraphs.items()}
 
     return main_title, paragraphs
+
+# Summarize a given text using TF-IDF
+def summarize(text: str) -> str:
+    doc = nlp(text)
+
+    # Define the desired POS tags
+    pos_tags = {'PROPN', 'ADJ', 'NOUN', 'VERB'}
+    # Extract keywords based on the desired POS tags
+    keywords = [token.text for token in doc if token.pos_ in pos_tags]
+
+    # Count the frequency of each keyword
+    freq_words = Counter(keywords)
+
+    # Find the maximum frequency
+    max_freq = max(freq_words.values())
+
+    # Normalize the frequencies of keywords
+    freq_words = {word: freq / max_freq for word, freq in freq_words.items()}
+
+    sent_strength = {}
+    for sent in doc.sents:
+        for word in sent:
+            if word.text in freq_words:
+                # Calculate the sentence strength based on the frequency of
+                # keywords
+                sent_strength.setdefault(sent, 0)
+                sent_strength[sent] += freq_words[word.text]
+
+    # Calculate the number of sentences to reduce the summary to
+    num_summarized_sents = len(list(doc.sents)) // 2
+
+    # Get the top n sentences with the highest strength
+    summarized_sentences = nlargest(
+        num_summarized_sents,
+        sent_strength,
+        key=sent_strength.get)
+
+    return ' '.join([sent.text.strip() for sent in summarized_sentences])
