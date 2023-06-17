@@ -88,3 +88,13 @@ def summarize(text: str) -> str:
         key=sent_strength.get)
 
     return ' '.join([sent.text.strip() for sent in summarized_sentences])
+
+# Estimate the Average reading time
+def reading_time(text: str) -> int:
+    # Using an average silent reading time in words per minute
+    avg_read_speed = 200
+
+    # Calculate the number of words
+    wordcount = len(text.split())
+
+    return math.ceil(wordcount / avg_read_speed)
