@@ -134,6 +134,9 @@ if __name__ == "__main__":
         # Extract text from test file
         text = get_text("model.md")
 
+        # Calculate the time it takes to read
+        rtime = reading_time(text)
+
         # Extract parts of the text
         MAIN_TITLE, paragraphs = extract_title_and_paragraphs(text)
 
@@ -142,7 +145,9 @@ if __name__ == "__main__":
             paragraphs[key] = summarize(paragraphs[key])
 
     # Displaying text in the Web App
-    st.header(MAIN_TITLE)
+    col1, col2 = st.columns(2, gap="large")
+    col1.header(MAIN_TITLE)
+    col2.metric("Reading Time", f"{rtime} min")
     for subheader, paragraph in paragraphs.items():
         st.subheader(subheader)
         st.write(paragraph)
