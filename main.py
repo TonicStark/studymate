@@ -4,6 +4,7 @@ from collections import Counter
 from heapq import nlargest
 import math
 import itertools
+import streamlit as st
 
 # Load Italian Language Model
 nlp = spacy.load('it_core_news_sm')
@@ -20,7 +21,7 @@ def get_text(file_path: str) -> str:
         raise IOError(f"An error occurred while reading the file: {str(e)}") from e
     
 # Extract titles and paragraphs from the file content
-def extract_title_and_paragraphs(file_content: str):
+def extract_title_and_paragraphs(file_content: str) -> tuple[str, dict]:
     lines = file_content.split('\n')
     main_title = ''
     paragraphs = {}
@@ -79,7 +80,7 @@ def summarize(text: str) -> str:
                 sent_strength[sent] += freq_words[word.text]
 
     # Calculate the number of sentences to reduce the summary to
-    num_summarized_sents = len(list(doc.sents)) // 2
+    num_summarized_sents = len(list(doc.sents)) // 3
 
     # Get the top n sentences with the highest strength
     summarized_sentences = nlargest(
@@ -123,3 +124,25 @@ def keywords(paragraphs: dict) -> list:
     keywords = list(itertools.islice(sorted_keywords.keys(), 7))
 
     return keywords
+
+# Main Program
+if __name__ == "__main__":
+
+    # Starting a Spinner while executing the summarization
+    with st.spinner("Wait for it"):
+
+        # Extract text from test file
+        text = get_text("model.md")
+
+        # Extract parts of the text
+        MAIN_TITLE, paragraphs = extract_title_and_paragraphs(text)
+
+        # Summarize each paragraph
+        for key in paragraphs.keys():
+            paragraphs[key] = summarize(paragraphs[key])
+
+    # Displaying text in the Web App
+    st.header(MAIN_TITLE)
+    for subheader, paragraph in paragraphs.items():
+        st.subheader(subheader)
+        st.write(paragraph)
