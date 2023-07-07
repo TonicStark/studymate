@@ -125,7 +125,7 @@ if __name__ == "__main__":
     st.title("Studymate")
 
     # Asking to input a file
-    file = st.file_uploader(".", "md", False, label_visibility="hidden")
+    file = st.file_uploader(".", ["md", "txt"], False, label_visibility="hidden")
 
     # Checking and executing only if a file is uploaded
     if file is not None:
