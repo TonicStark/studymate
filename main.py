@@ -118,6 +118,12 @@ def keywords(paragraphs: dict) -> list:
 # Main Program
 if __name__ == "__main__":
 
+    # Modifiyng App name and icon
+    st.set_page_config(page_title='Studymate', page_icon = "favicon.ico", layout = "wide")
+
+    # Title of the Program
+    st.title("Studymate")
+
     # Asking to input a file
     file = st.file_uploader(".", "md", False, label_visibility="hidden")
 
