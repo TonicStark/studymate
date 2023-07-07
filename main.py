@@ -5,20 +5,10 @@ from heapq import nlargest
 import math
 import itertools
 import streamlit as st
+from io import StringIO
 
 # Load Italian Language Model
 nlp = spacy.load('it_core_news_sm')
-
-# Get the text from a file
-def get_text(file_path: str) -> str:
-    try:
-        with open(file_path, "r", encoding="utf8") as file:
-            text = file.read()
-        return text
-    except FileNotFoundError as e:
-        raise FileNotFoundError(f"The file '{file_path}' does not exist.") from e
-    except IOError as e:
-        raise IOError(f"An error occurred while reading the file: {str(e)}") from e
     
 # Extract titles and paragraphs from the file content
 def extract_title_and_paragraphs(file_content: str) -> tuple[str, dict]:
@@ -80,7 +70,7 @@ def summarize(text: str) -> str:
                 sent_strength[sent] += freq_words[word.text]
 
     # Calculate the number of sentences to reduce the summary to
-    num_summarized_sents = len(list(doc.sents)) // 3
+    num_summarized_sents = len(list(doc.sents)) // 4
 
     # Get the top n sentences with the highest strength
     summarized_sentences = nlargest(
@@ -128,26 +118,33 @@ def keywords(paragraphs: dict) -> list:
 # Main Program
 if __name__ == "__main__":
 
-    # Starting a Spinner while executing the summarization
-    with st.spinner("Wait for it"):
+    # Asking to input a file
+    file = st.file_uploader(".", "md", False, label_visibility="hidden")
 
-        # Extract text from test file
-        text = get_text("model.md")
+    # Checking and executing only if a file is uploaded
+    if file is not None:
 
-        # Calculate the time it takes to read
-        rtime = reading_time(text)
+        # Starting a Spinner while executing the summarization
+        with st.spinner("Summarizing..."):
 
-        # Extract parts of the text
-        MAIN_TITLE, paragraphs = extract_title_and_paragraphs(text)
+            # Extract text from test file
+            stringio = StringIO(file.getvalue().decode("utf-8"))
+            text = stringio.read()
 
-        # Summarize each paragraph
-        for key in paragraphs.keys():
-            paragraphs[key] = summarize(paragraphs[key])
+            # Calculate the time it takes to read
+            rtime = reading_time(text)
 
-    # Displaying text in the Web App
-    col1, col2 = st.columns(2, gap="large")
-    col1.header(MAIN_TITLE)
-    col2.metric("Reading Time", f"{rtime} min")
-    for subheader, paragraph in paragraphs.items():
-        st.subheader(subheader)
-        st.write(paragraph)
+            # Extract parts of the text
+            MAIN_TITLE, paragraphs = extract_title_and_paragraphs(text)
+
+            # Summarize each paragraph
+            for key in paragraphs.keys():
+                paragraphs[key] = summarize(paragraphs[key])
+
+        # Displaying text in the Web App
+        col1, col2 = st.columns(2, gap="large")
+        col1.header(MAIN_TITLE)
+        col2.metric("Reading Time", f"{rtime} min")
+        for subheader, paragraph in paragraphs.items():
+            st.subheader(subheader)
+            st.write(paragraph)
