@@ -1,40 +1,42 @@
 # Studymate
-Studymate is a portable piece of software that helps you with studying and memorization.
+Studymate è un software portatile che ti aiuta nello studio e nella memorizzazione.
 
 ## Set Up
-### Locally
-Download the ZIP Folder, or Clone the Repository with:
+### Localmente
+Scarica la cartella ZIP o clona il repository con:
 ```
-git clone https://github.com/TonicStark/studymate.git
+clone di git https://github.com/TonicStark/studymate.git
 ```
 
-Then install the dependencies in a virtualenv you can create one via `python -m venv <name of the virtualenv>` with:
-```python
+Quindi installa le dipendenze in un virtualenv puoi crearne una tramite `python -m venv <nome del virtualenv>` con:
+```
 pip install -r requirements.txt
 ```
 
-When you are done with this, you can already use the app by simply *activating* your virtualenv and running:
+Quando hai finito, puoi già utilizzare l'app semplicemente *attivando* il tuo virtualenv ed eseguendo:
 ```
 streamlit run .\main.py
 ```
 
-This will start a **local server** on your *computer*, and another one on the **network** (Wi-Fi if you're connected) so that you can *access* from different devices.
+Questo avvierà un **server locale** sul tuo *computer* e un altro sulla **rete** (Wi-Fi se sei connesso) in modo che tu possa *accedere* da diversi dispositivi.
 
 ### Online
-TODO
+DA FARE
 
-## Format
-To use this app, you need to provide a file with a specific structure and syntax, for example:
-```md
-# Main Title
-## Subtitle 1
-Paragraph 1
-## Subtitle 2
-Paragraph 2
+## Sintassi e Formattazione
+Per utilizzare questa app, devi fornire un file con una struttura e una sintassi specifiche, ad esempio:
+``` md
+# Titolo principale
+
+## Sottotitolo 1
+Paragrafo 1
+
+## Sottotitolo 2
+Paragrafo 2
 ECC...
 ```
 
-You provide a *main title* and then for each *subtitle*, the correspondent *paragraph* **(all using `.md` syntax)**.
+Fornisci un *titolo principale* e poi per ogni *sottotitolo*, il corrispondente *paragrafo* **(usando la sintassi `.md`)**.
 
-# Enjoy it
-At this point you can use the app with the **simplicity** of clicking a button!
+# Goditelo
+A questo punto puoi utilizzare l'app con la **semplicità** di cliccare un pulsante!
