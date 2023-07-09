@@ -50,7 +50,7 @@ def extract_title_and_paragraphs(file_content: str) -> tuple[str, dict]:
 # Summarize a given text using TF-IDF
 
 
-def summarize(text: str) -> str:
+def summarize(text: str, perc: int) -> str:
     doc = nlp(text)
 
     # Define the desired POS tags
@@ -77,7 +77,9 @@ def summarize(text: str) -> str:
                 sent_strength[sent] += freq_words[word.text]
 
     # Calculate the number of sentences to reduce the summary to
-    num_summarized_sents = len(list(doc.sents)) // 3
+    lines = len(list(doc.sents))
+    divisor = 100 // perc
+    num_summarized_sents = len(list(doc.sents)) // divisor
 
     # Get the top n sentences with the highest strength
     summarized_sentences = nlargest(
@@ -146,6 +148,9 @@ if __name__ == "__main__":
     # Asking to input a file
     file = st.file_uploader(
         ".", ["md", "txt"], False, label_visibility="hidden")
+    
+    # Creating a slider for managing the amount of summarization
+    perc_slider = st.select_slider("Select the precentage (%) of the summary", (10, 20, 30, 40, 50, 60, 70, 80, 90), 50)
 
     # Checking and executing only if a file is uploaded
     if file is not None:
@@ -165,7 +170,7 @@ if __name__ == "__main__":
 
             # Summarize each paragraph
             for key in paragraphs.keys():
-                paragraphs[key] = summarize(paragraphs[key])
+                paragraphs[key] = summarize(paragraphs[key], perc_slider)
 
             # Create a new unique file string to calculate final reading time
             final_string = MAIN_TITLE
