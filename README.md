@@ -21,7 +21,7 @@ streamlit run .\main.py
 This will start a **local server** on your *computer*, and another one on the **network** (Wi-Fi if you're connected) so that you can *access* from different devices.
 
 ### Online
-TODO
+To use this app online, simply visit [studymate](https://studymate.streamlit.app/)!
 
 ## Format
 To use this app, you need to provide a file with a specific structure and syntax, for example:
