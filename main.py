@@ -9,8 +9,10 @@ from io import StringIO
 
 # Load Italian Language Model
 nlp = spacy.load('it_core_news_sm')
-    
+
 # Extract titles and paragraphs from the file content
+
+
 def extract_title_and_paragraphs(file_content: str) -> tuple[str, dict]:
     lines = file_content.split('\n')
     main_title = ''
@@ -26,7 +28,8 @@ def extract_title_and_paragraphs(file_content: str) -> tuple[str, dict]:
                 main_title = line[1:]
             else:
                 if current_paragraph:
-                    paragraphs[current_title] = ' '.join(current_paragraph).strip()
+                    paragraphs[current_title] = ' '.join(
+                        current_paragraph).strip()
                 current_title = line[1:]
                 current_paragraph = []
         elif line.startswith('##'):
@@ -38,11 +41,15 @@ def extract_title_and_paragraphs(file_content: str) -> tuple[str, dict]:
         paragraphs[current_title] = ' '.join(current_paragraph).strip()
 
     # Remove '#' and space before each paragraph title
-    paragraphs = {title.strip('# '): content for title, content in paragraphs.items()}
+    paragraphs = {
+        title.strip('# '): content for title,
+        content in paragraphs.items()}
 
     return main_title, paragraphs
 
 # Summarize a given text using TF-IDF
+
+
 def summarize(text: str) -> str:
     doc = nlp(text)
 
@@ -81,6 +88,8 @@ def summarize(text: str) -> str:
     return ' '.join([sent.text.strip() for sent in summarized_sentences])
 
 # Estimate the Average reading time
+
+
 def reading_time(text: str) -> int:
     # Using an average silent reading time in words per minute
     avg_read_speed = 200
@@ -91,6 +100,8 @@ def reading_time(text: str) -> int:
     return math.ceil(wordcount / avg_read_speed)
 
 # Extract the most important keywords from the file
+
+
 def keywords(paragraphs: dict) -> list:
     # Concatenate all paragraphs into a single text
     text = ' '.join(paragraphs.values())
@@ -100,7 +111,7 @@ def keywords(paragraphs: dict) -> list:
 
     # Define the desired POS tags
     pos_tags = {'PROPN', 'ADJ', 'NOUN', 'VERB'}
-    
+
     # Extract keywords based on the desired POS tags
     keywords = [token.text for token in doc if token.pos_ in pos_tags]
 
@@ -108,24 +119,33 @@ def keywords(paragraphs: dict) -> list:
     freq_words = Counter(keywords)
 
     # Sort the keywords by frequency in descending order
-    sorted_keywords = dict(sorted(freq_words.items(), key=lambda item: item[1], reverse=True))
+    sorted_keywords = dict(
+        sorted(
+            freq_words.items(),
+            key=lambda item: item[1],
+            reverse=True))
 
     # Extract the first 7 keywords with the highest frequency
     keywords = list(itertools.islice(sorted_keywords.keys(), 7))
 
     return keywords
 
+
 # Main Program
 if __name__ == "__main__":
 
     # Modifiyng App name and icon
-    st.set_page_config(page_title='Studymate', page_icon = "favicon.ico", layout = "wide")
+    st.set_page_config(
+        page_title='Studymate',
+        page_icon="favicon.ico",
+        layout="wide")
 
     # Title of the Program
     st.title("Studymate")
 
     # Asking to input a file
-    file = st.file_uploader(".", ["md", "txt"], False, label_visibility="hidden")
+    file = st.file_uploader(
+        ".", ["md", "txt"], False, label_visibility="hidden")
 
     # Checking and executing only if a file is uploaded
     if file is not None:
@@ -159,7 +179,11 @@ if __name__ == "__main__":
         # Displaying text in the Web App
         col1, col2 = st.columns(2, gap="large")
         col1.header(MAIN_TITLE)
-        col2.metric("Reading Time", f"{final_rtime} min", f"- {round(improvment)}%", "inverse")
+        col2.metric(
+            "Reading Time",
+            f"{final_rtime} min",
+            f"- {round(improvment)}%",
+            "inverse")
         for subheader, paragraph in paragraphs.items():
             st.subheader(subheader)
             st.write(paragraph)
