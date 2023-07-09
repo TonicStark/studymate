@@ -21,7 +21,7 @@ streamlit run .\main.py
 Questo avvierà un **server locale** sul tuo *computer* e un altro sulla **rete** (Wi-Fi se sei connesso) in modo che tu possa *accedere* da diversi dispositivi.
 
 ### Online
-DA FARE
+Per usare questa app online, visita semplicemente [studymate](https://studymate.streamlit.app/)!
 
 ## Sintassi e Formattazione
 Per utilizzare questa app, devi fornire un file con una struttura e una sintassi specifiche, ad esempio:
