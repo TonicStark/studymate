@@ -70,7 +70,7 @@ def summarize(text: str) -> str:
                 sent_strength[sent] += freq_words[word.text]
 
     # Calculate the number of sentences to reduce the summary to
-    num_summarized_sents = len(list(doc.sents)) // 4
+    num_summarized_sents = len(list(doc.sents)) // 3
 
     # Get the top n sentences with the highest strength
     summarized_sentences = nlargest(
@@ -138,7 +138,7 @@ if __name__ == "__main__":
             text = stringio.read()
 
             # Calculate the time it takes to read
-            rtime = reading_time(text)
+            original_rtime = reading_time(text)
 
             # Extract parts of the text
             MAIN_TITLE, paragraphs = extract_title_and_paragraphs(text)
@@ -147,10 +147,19 @@ if __name__ == "__main__":
             for key in paragraphs.keys():
                 paragraphs[key] = summarize(paragraphs[key])
 
+            # Create a new unique file string to calculate final reading time
+            final_string = MAIN_TITLE
+            for title, paragraph in paragraphs.items():
+                final_string += f"\n{title}\n{paragraph}"
+            final_rtime = reading_time(final_string)
+
+            # Calculate % improvement on time
+            improvment = 100 - (final_rtime * 100) / original_rtime
+
         # Displaying text in the Web App
         col1, col2 = st.columns(2, gap="large")
         col1.header(MAIN_TITLE)
-        col2.metric("Reading Time", f"{rtime} min")
+        col2.metric("Reading Time", f"{final_rtime} min", f"- {round(improvment)}%", "inverse")
         for subheader, paragraph in paragraphs.items():
             st.subheader(subheader)
             st.write(paragraph)
