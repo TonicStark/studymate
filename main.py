@@ -101,37 +101,6 @@ def reading_time(text: str) -> int:
 
     return math.ceil(wordcount / avg_read_speed)
 
-# Extract the most important keywords from the file
-
-
-def keywords(paragraphs: dict) -> list:
-    # Concatenate all paragraphs into a single text
-    text = ' '.join(paragraphs.values())
-
-    # Process the text with the NLP model
-    doc = nlp(text)
-
-    # Define the desired POS tags
-    pos_tags = {'PROPN', 'ADJ', 'NOUN', 'VERB'}
-
-    # Extract keywords based on the desired POS tags
-    keywords = [token.text for token in doc if token.pos_ in pos_tags]
-
-    # Count the frequency of each keyword
-    freq_words = Counter(keywords)
-
-    # Sort the keywords by frequency in descending order
-    sorted_keywords = dict(
-        sorted(
-            freq_words.items(),
-            key=lambda item: item[1],
-            reverse=True))
-
-    # Extract the first 7 keywords with the highest frequency
-    keywords = list(itertools.islice(sorted_keywords.keys(), 7))
-
-    return keywords
-
 
 # Main Program
 if __name__ == "__main__":
