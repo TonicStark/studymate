@@ -77,7 +77,6 @@ def summarize(text: str, perc: int) -> str:
                 sent_strength[sent] += freq_words[word.text]
 
     # Calculate the number of sentences to reduce the summary to
-    lines = len(list(doc.sents))
     divisor = 100 // perc
     num_summarized_sents = len(list(doc.sents)) // divisor
 
@@ -117,9 +116,20 @@ if __name__ == "__main__":
     # Asking to input a file
     file = st.file_uploader(
         ".", ["md", "txt"], False, label_visibility="hidden")
-    
+
     # Creating a slider for managing the amount of summarization
-    perc_slider = st.select_slider("Select the precentage (%) of the summary", (10, 20, 30, 40, 50, 60, 70, 80, 90), 50)
+    perc_slider = st.select_slider(
+        "Select the precentage (%) of the summary",
+        (10,
+         20,
+         30,
+         40,
+         50,
+         60,
+         70,
+         80,
+         90),
+        50)
 
     # Checking and executing only if a file is uploaded
     if file is not None:
@@ -148,7 +158,7 @@ if __name__ == "__main__":
             final_rtime = reading_time(final_string)
 
             # Calculate % improvement on time
-            improvment = 100 - (final_rtime * 100) / original_rtime
+            improvment = round(100 - (final_rtime * 100) / original_rtime)
 
         # Displaying text in the Web App
         col1, col2 = st.columns(2, gap="large")
@@ -156,8 +166,8 @@ if __name__ == "__main__":
         col2.metric(
             "Reading Time",
             f"{final_rtime} min",
-            f"- {round(improvment)}%",
-            "inverse")
+            f"{improvment}%" if improvment != 0 else "",
+            "inverse" if improvment != 0 else "off")
         for subheader, paragraph in paragraphs.items():
 
             # Checking if the paragraph content exist
