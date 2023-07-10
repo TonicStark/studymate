@@ -167,7 +167,7 @@ if __name__ == "__main__":
             "Reading Time",
             f"{final_rtime} min",
             f"- {improvement}%" if improvement != 0 else f"{improvement}%",
-            "inverse" if improvement != 0 else "off")
+            "inverse" if improvement != 0 else "of")
         for subheader, paragraph in paragraphs.items():
 
             # Checking if the paragraph content exist
