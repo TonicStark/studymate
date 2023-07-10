@@ -3,7 +3,6 @@ import spacy
 from collections import Counter
 from heapq import nlargest
 import math
-import itertools
 import streamlit as st
 from io import StringIO
 
