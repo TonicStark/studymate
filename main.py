@@ -158,7 +158,7 @@ if __name__ == "__main__":
             final_rtime = reading_time(final_string)
 
             # Calculate % improvement on time
-            improvment = round(100 - (final_rtime * 100) / original_rtime)
+            improvement = round(100 - (final_rtime * 100) / original_rtime)
 
         # Displaying text in the Web App
         col1, col2 = st.columns(2, gap="large")
@@ -166,8 +166,8 @@ if __name__ == "__main__":
         col2.metric(
             "Reading Time",
             f"{final_rtime} min",
-            f"{improvment}%" if improvment != 0 else "",
-            "inverse" if improvment != 0 else "off")
+            f"- {improvement}%" if improvement != 0 else f"{improvement}%",
+            "inverse" if improvement != 0 else "off")
         for subheader, paragraph in paragraphs.items():
 
             # Checking if the paragraph content exist
