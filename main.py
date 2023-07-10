@@ -159,5 +159,8 @@ if __name__ == "__main__":
             f"- {round(improvment)}%",
             "inverse")
         for subheader, paragraph in paragraphs.items():
-            st.subheader(subheader)
-            st.write(paragraph)
+
+            # Checking if the paragraph content exist
+            if paragraph:
+                st.subheader(subheader)
+                st.write(paragraph)
