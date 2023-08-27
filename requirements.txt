@@ -1,7 +1,7 @@
 altair==5.0.1
 annotated-types==0.5.0
 attrs==23.1.0
-autopep8==2.0.2
+autopep8==2.0.4
 blinker==1.6.2
 blis==0.7.10
 cachetools==5.3.1
@@ -31,11 +31,11 @@ pandas==2.0.3
 pathy==0.10.2
 Pillow==9.5.0
 preshed==3.0.8
-protobuf==4.24.1
-pyarrow==12.0.1
+protobuf==4.24.2
+pyarrow==13.0.0
 pycodestyle==2.11.0
-pydantic==2.2.1
-pydantic_core==2.6.1
+pydantic==2.3.0
+pydantic_core==2.6.3
 pydeck==0.8.0
 Pygments==2.16.1
 Pympler==1.0.1
@@ -53,7 +53,7 @@ spacy==3.6.1
 spacy-legacy==3.0.12
 spacy-loggers==1.0.4
 srsly==2.4.7
-streamlit==1.25.0
+streamlit==1.26.0
 tenacity==8.2.3
 thinc==8.1.12
 toml==0.10.2
