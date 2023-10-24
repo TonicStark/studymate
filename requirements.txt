@@ -7,14 +7,14 @@ blis==0.7.11
 cachetools==5.3.1
 catalogue==2.0.10
 certifi==2023.7.22
-charset-normalizer==3.3.0
+charset-normalizer==3.3.1
 click==8.1.7
 cloudpathlib==0.16.0
 colorama==0.4.6
 confection==0.1.3
 cymem==2.0.8
 decorator==5.1.1
-gitdb==4.0.10
+gitdb==4.0.11
 GitPython==3.1.40
 idna==3.4
 importlib-metadata==6.8.0
@@ -30,7 +30,7 @@ murmurhash==1.0.10
 numpy==1.26.1
 packaging==23.2
 pandas==2.1.1
-pathy==0.10.2
+pathy==0.10.3
 Pillow==10.1.0
 pip-review==1.3.0
 preshed==3.0.9
@@ -66,7 +66,7 @@ tqdm==4.66.1
 typer==0.9.0
 typing_extensions==4.8.0
 tzdata==2023.3
-tzlocal==5.1
+tzlocal==5.2
 urllib3==2.0.7
 validators==0.22.0
 wasabi==1.1.2
