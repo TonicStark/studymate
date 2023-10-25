@@ -3,8 +3,8 @@ annotated-types==0.6.0
 attrs==23.1.0
 autopep8==2.0.4
 blinker==1.6.3
-blis==0.7.11
-cachetools==5.3.1
+blis==0.9.1
+cachetools==5.3.2
 catalogue==2.0.10
 certifi==2023.7.22
 charset-normalizer==3.3.1
@@ -38,7 +38,7 @@ protobuf==4.24.4
 pyarrow==13.0.0
 pycodestyle==2.11.1
 pydantic==2.4.2
-pydantic_core==2.10.1
+pydantic_core==2.11.0
 pydeck==0.8.0
 Pygments==2.16.1
 Pympler==1.0.1
