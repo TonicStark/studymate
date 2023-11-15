@@ -21,7 +21,7 @@ importlib-metadata==6.8.0
 it-core-news-sm @ https://github.com/explosion/spacy-models/releases/download/it_core_news_sm-3.7.0/it_core_news_sm-3.7.0-py3-none-any.whl#sha256=c6a300c7d7b440cee6a896f648bce744c9f091375dc8d7ff834a8930d59eb4bd
 Jinja2==3.1.2
 jsonschema==4.19.2
-jsonschema-specifications==2023.7.1
+jsonschema-specifications==2023.11.1
 langcodes==3.3.0
 markdown-it-py==3.0.0
 MarkupSafe==2.1.3
@@ -45,7 +45,7 @@ Pympler==1.0.1
 python-dateutil==2.8.2
 pytz==2023.3.post1
 pytz-deprecation-shim==0.1.0.post0
-referencing==0.30.2
+referencing==0.31.0
 requests==2.31.0
 rich==13.6.0
 rpds-py==0.12.0
