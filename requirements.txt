@@ -17,7 +17,7 @@ decorator==5.1.1
 gitdb==4.0.11
 GitPython==3.1.40
 idna==3.6
-importlib-metadata==6.9.0
+importlib-metadata==6.11.0
 it-core-news-sm @ https://github.com/explosion/spacy-models/releases/download/it_core_news_sm-3.7.0/it_core_news_sm-3.7.0-py3-none-any.whl#sha256=c6a300c7d7b440cee6a896f648bce744c9f091375dc8d7ff834a8930d59eb4bd
 Jinja2==3.1.2
 jsonschema==4.20.0
